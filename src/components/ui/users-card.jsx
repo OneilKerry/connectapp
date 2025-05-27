@@ -1,4 +1,4 @@
-export default function UserCard({ name, email, roles, Status }) {
+export default function UserCard({ name, email, roles, status }) {
     return (
         <div className="user-card flex w-[97%] justify-between items-center border border-gray-300 rounded-[7px] p-3 mb-2 bg-white text-[15px] leading-tight">
             <div className="user-info">
@@ -7,7 +7,7 @@ export default function UserCard({ name, email, roles, Status }) {
                 <div className="mt-1.5"></div>
                 <span className="inline-block bg-black text-white px-1 py-[1px] text-[10px] rounded-[2px] font-sans mr-1.5">{roles}</span>
             </div>
-            <div className="status aktif flex text-lg font-bold font-sans">{Status}</div>
+            <div className="status aktif flex text-lg font-bold font-sans">{status}</div>
         </div>
     );
 }

@@ -1,7 +1,7 @@
 import { IconLogout2, IconUser, IconUsersPlus, IconPlus } from "@tabler/icons-react";
 import Link from "next/link";
 import RolesCard from "@/components/ui/tablerole";
-import dataroles from "../../../mock/roledata";
+import { dataroles } from "../../../mock/roledata";
 
 export default function RolesPage() {
   return (
@@ -38,7 +38,7 @@ export default function RolesPage() {
           </thead>
           <tbody>
             {dataroles.map((item, index) => (
-              <RolesCard key={item.id} id={item.id} role={item.role} index={index} />
+              <RolesCard key={index} id={item.id} role={item.role}/>
             ))}
           </tbody>
         </table>
