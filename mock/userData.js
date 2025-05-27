@@ -1,20 +1,26 @@
-export const usersData =[
-    {
+export const usersData = [
+{
     name:"Rahmat Saudi Al Fathir",
-    email:"rahmatsaudialfathir@gmail.com",
-    status:"Aktif",
-    roles:"admin",
+    email:"rahmatsaudi@universitas.ac.id",
+    roles:"Admin",
+    status:"Aktif"
+},
+{
+    name:"Lintang",
+    email:"lintang@universitas.ac.id",
+    roles:"Employee",
+    status:"Aktif"
 },
 {
     name:"Shafira",
-    email:"shafira@gmail.com",
-    status:"Aktif",
-    roles:"employee",
+    email:"shafira@universitas.ac.id",
+    roles:"Employee",
+    status:"Aktif"
 },
 {
-    name:"Oneil",
-    email:"oneilkrry@gmail.com",
-    status:"Aktif",
-    roles:"developer",
+    name:"LebahGanteng",
+    email:"lebahganteng@universitas.ac.id",
+    roles:"Employee",
+    status:"Aktif"
 }
-]
+];
