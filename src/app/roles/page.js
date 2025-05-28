@@ -17,9 +17,12 @@ export default function RolesPage() {
           <button className="rounded-[10px] flex items-center gap-2 py-2 px-3 bg-black text-white border border-gray-300 w-[90%] cursor-pointer">
             <IconUsersPlus /> Hak Akses
           </button>
+          <Link href="../">
           <button className="flex items-center gap-2 py-2 px-3 w-[90%]">
             <IconLogout2 /> Logout
           </button>
+          </Link>
+          
         </div>
       </section>
       <section id="content" className="bg-white w-[85%] p-5">
