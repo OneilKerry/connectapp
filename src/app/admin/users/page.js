@@ -7,36 +7,13 @@ import {
   IconUsersPlus,
   IconPlus,
 } from "@tabler/icons-react";
-import { usersData } from "../../../mock/userData";
+import { usersData } from "../../../../mock/userData";
 import Link from "next/link";
 
 export default function Users() {
   return (
     <section id="container" className="flex h-screen justify-center">
-      <section
-        id="navigation"
-        className="bg-white w-[15%] border-r border-gray-300 p-4 "
-      >
-        <h1 className="text-[30px] mb-5  font-sans  font-bold text-center">
-          Connect
-        </h1>
-        <div className="nav-buttons flex flex-col items-center gap-4 p-2 w-full mb-2 font-bold text-[18px]">
-          <button className="rounded-[10px] flex items-center gap-2 py-2 px-3 bg-black text-white border border-gray-300 w-[90%] cursor-pointer">
-            <IconUser /> User
-          </button>
-          <Link href="../roles">
-            <button className="rounded-[10px] flex items-center gap-2 py-2 px-3 text-black ">
-              <IconUsersPlus /> Hak Akses
-            </button>
-          </Link>
-
-          <Link href="../"> 
-            <button className=" flex items-center gap-2 py-2 px-3  w-[90%] ">
-              <IconLogout2 /> Logout
-            </button>
-          </Link>
-        </div>
-      </section>
+      
 
       <section id="content" className="bg-white w-[85%] p-5">
         <input

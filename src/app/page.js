@@ -9,12 +9,7 @@ export default function Home() {
   const [data, setData] = useState({ username: "", password: "" });
 
   function handleSubmit() {
-    if (condition) {
-      
-    } else {
-      
-    }
-    router.push("/users");
+    router.push("/admin/users");
   }
 
   return (
