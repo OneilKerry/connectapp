@@ -7,7 +7,7 @@ export default function RolesPage() {
   return (
     <section id="container" className="flex h-screen justify-center">
 
-      <section id="content" className="bg-white w-[85%] p-5">
+      <section id="content" className="bg-white w-[85%] ">
          <input
         type="text"
         placeholder="Cari Hak Akses"
