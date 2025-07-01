@@ -22,7 +22,7 @@ export default function Home() {
         
         onChange={(e) => setData((currentData) => ({...currentData, password: e.target.value,}))}/>
 
-        <Button onClick={handleSubmit}>Sign in</Button>
+        <Button className="w-[100%]" onClick={handleSubmit}>Sign in</Button>
       </div>
     </main>
   );

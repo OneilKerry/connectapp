@@ -17,7 +17,7 @@ export default function PageNews(){
   }
 
     return (
-        <div>
+        <div className="flex flex-col gap-4">
             {post.map((post, index) => ( 
                 <div className="border-2 p-10 rounded-lg" key={index}>
                 <p className="text-base font-bold text-[20px] font-sans ">{post.title}</p>

@@ -1,14 +1,8 @@
 "use client";
 import UserCard from "@/components/ui/users-card";
 import {
-  IconLogout,
-  IconLogout2,
-  IconUser,
-  IconUsersGroup,
-  IconUsersPlus,
-  IconPlus,
+  IconPlus
 } from "@tabler/icons-react";
-import { usersData } from "../../../../mock/userData";
 import useSWR from "swr";
 
 export default function Users() {
