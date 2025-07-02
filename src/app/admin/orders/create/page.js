@@ -1,9 +1,11 @@
 "use client";
+
 import { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabaseClient";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { IconArrowLeft } from "@tabler/icons-react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function CreateOrder() {
   const router = useRouter();
@@ -11,6 +13,7 @@ export default function CreateOrder() {
   const [selectedProductId, setSelectedProductId] = useState("");
   const [quantity, setQuantity] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [loadingProducts, setLoadingProducts] = useState(true);
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -24,6 +27,7 @@ export default function CreateOrder() {
       } else {
         setProducts(data);
       }
+      setLoadingProducts(false);
     };
 
     fetchProducts();
@@ -36,20 +40,8 @@ export default function CreateOrder() {
 
     const selectedProduct = products.find((p) => p.id === selectedProductId);
 
-    if (!selectedProductId) {
-      setError("Silakan pilih produk terlebih dahulu.");
-      setLoading(false);
-      return;
-    }
-
-    if (!selectedProduct) {
-      setError("Produk tidak ditemukan.");
-      setLoading(false);
-      return;
-    }
-
-    if (quantity < 1) {
-      setError("Jumlah minimal adalah 1.");
+    if (!selectedProductId || !selectedProduct || quantity < 1) {
+      setError("Input tidak valid.");
       setLoading(false);
       return;
     }
@@ -98,36 +90,46 @@ export default function CreateOrder() {
       {error && <p className="text-red-500">{error}</p>}
 
       <div className="grid grid-cols-2 gap-4 mb-4">
-        {products.map((product) => {
-          const isOutOfStock = product.stock <= 0;
+        {loadingProducts
+          ? [...Array(4)].map((_, i) => (
+              <div key={i} className="p-3 border rounded bg-gray-100">
+                <Skeleton className="h-4 w-1/2 mb-2" />
+                <Skeleton className="h-4 w-1/3 mb-2" />
+                <Skeleton className="h-16 w-full rounded" />
+              </div>
+            ))
+          : products.map((product) => {
+              const isOutOfStock = product.stock <= 0;
 
-          return (
-            <button
-              key={product.id}
-              type="button"
-              onClick={() => {
-                if (!isOutOfStock) setSelectedProductId(product.id);
-              }}
-              disabled={isOutOfStock}
-              className={`p-3 border rounded ${
-                selectedProductId === product.id ? "bg-blue-200" : "bg-gray-100"
-              } ${isOutOfStock ? "opacity-50 cursor-not-allowed" : ""}`}
-            >
-              <p>{product.name}</p>
-              <p>Stok: {product.stock}</p>
-              {product.image_url && (
-                <img
-                  src={product.image_url}
-                  alt={product.name}
-                  className="h-16 object-cover"
-                />
-              )}
-              {isOutOfStock && (
-                <p className="text-red-500 text-sm mt-1">Stok Habis</p>
-              )}
-            </button>
-          );
-        })}
+              return (
+                <button
+                  key={product.id}
+                  type="button"
+                  onClick={() => {
+                    if (!isOutOfStock) setSelectedProductId(product.id);
+                  }}
+                  disabled={isOutOfStock}
+                  className={`p-3 border rounded ${
+                    selectedProductId === product.id
+                      ? "bg-blue-200"
+                      : "bg-gray-100"
+                  } ${isOutOfStock ? "opacity-50 cursor-not-allowed" : ""}`}
+                >
+                  <p>{product.name}</p>
+                  <p>Stok: {product.stock}</p>
+                  {product.image_url && (
+                    <img
+                      src={product.image_url}
+                      alt={product.name}
+                      className="h-16 object-cover"
+                    />
+                  )}
+                  {isOutOfStock && (
+                    <p className="text-red-500 text-sm mt-1">Stok Habis</p>
+                  )}
+                </button>
+              );
+            })}
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-3">
@@ -146,7 +148,7 @@ export default function CreateOrder() {
             {loading ? "Menyimpan..." : "Simpan Pesanan"}
           </Button>
           <Button type="button" onClick={() => router.back()}>
-            <IconArrowLeft />
+            <IconArrowLeft className="mr-1" />
             Kembali
           </Button>
         </div>

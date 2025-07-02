@@ -1,9 +1,11 @@
 "use client";
+
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
 import { IconEdit, IconPlus, IconTrash } from "@tabler/icons-react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function ProductsPage() {
   const router = useRouter();
@@ -30,10 +32,7 @@ export default function ProductsPage() {
     const confirmDelete = confirm("Apakah yakin ingin menghapus produk ini?");
     if (!confirmDelete) return;
 
-    const { error } = await supabase
-      .from("products")
-      .delete()
-      .eq("id", id);
+    const { error } = await supabase.from("products").delete().eq("id", id);
 
     if (error) {
       console.error("Gagal delete:", error);
@@ -44,14 +43,24 @@ export default function ProductsPage() {
     }
   };
 
-  if (loading) return <p>Loading...</p>;
-
   return (
     <section id="container" className="flex justify-center">
-      <section id="content" className="bg-white w-[85%] grid grid-cols-3 gap-4">
-          
-        
-        {products.length === 0 ? (
+      <section id="content" className="bg-white w-[85%] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        {loading ? (
+          // SKELETON loading untuk 6 item
+          Array.from({ length: 6 }).map((_, i) => (
+            <div key={i} className="border rounded p-4 shadow-sm flex flex-col">
+              <Skeleton className="h-5 w-1/2 mb-2" />
+              <Skeleton className="h-[140px] w-full rounded mb-2" />
+              <Skeleton className="h-4 w-1/3 mb-1" />
+              <Skeleton className="h-4 w-1/2 mb-2" />
+              <div className="flex gap-2">
+                <Skeleton className="h-8 w-20 rounded" />
+                <Skeleton className="h-8 w-20 rounded" />
+              </div>
+            </div>
+          ))
+        ) : products.length === 0 ? (
           <p>Belum ada data produk.</p>
         ) : (
           products.map((product) => (
@@ -62,7 +71,7 @@ export default function ProductsPage() {
                 <img
                   src={product.image_url}
                   alt={product.name}
-                  className="w-[100%] h-[50%] rounded-2 mt-2" 
+                  className="w-full h-[140px] object-cover rounded mt-2"
                 />
               )}
 
@@ -74,20 +83,19 @@ export default function ProductsPage() {
                   onClick={() => router.push(`/admin/products/update/${product.id}`)}
                   className="bg-blue-500"
                 >
-                  Edit <IconEdit/>
+                  Edit <IconEdit className="ml-1" />
                 </Button>
 
                 <Button
                   onClick={() => handleDelete(product.id)}
                   className="bg-red-500"
                 >
-                  Delete<IconTrash/>
+                  Delete <IconTrash className="ml-1" />
                 </Button>
               </div>
             </div>
           ))
         )}
-
       </section>
 
       <button

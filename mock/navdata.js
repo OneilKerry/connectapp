@@ -1,4 +1,5 @@
 import {
+  IconDashboard,
   IconHistory,
   IconLogout,
   IconMailExclamation,
@@ -13,6 +14,7 @@ export const navdata = [
   { icon: IconUser, item: "User", path: "/admin/users" },
   { icon: IconUserMinus, item: "Roles", path: "/admin/roles" },
   { icon: IconNews, item: "News", path: "/admin/news" },
+  { icon: IconDashboard, item: "Dashboard", path: "/admin/dashboard" },
   { icon: IconUsersGroup, item: "Customers", path: "/admin/customers" },
   { icon: IconPackage, item: "Products", path: "/admin/products" },
   { icon: IconMailExclamation, item: "Orders", path: "/admin/orders" },
